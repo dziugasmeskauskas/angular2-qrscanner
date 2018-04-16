@@ -1,16 +1,7 @@
 {
   "name": "angular2-qrscanner",
   "version": "1.0.3",
-  "scripts": {
-    "start": "ng serve --aot --host 0.0.0.0",
-    "build": "ng-packagr -p ng-package.json",
-    "test": "npm run lint && ng test --watch false",
-    "test-watch": "ng test",
-    "e2e": "ng e2e",
-    "e2e-watch": "watch \"ng e2e -s false\" src e2e --wait=1",
-    "lint": "ng lint"
-  },
-  "main": "./src/index.ts",
+  "main": "bundles/angular2-qrscanner.umd.js",
   "repository": {
     "type": "git",
     "url": "cd dishttps://github.com/goergch/angular2-qrscanner"
@@ -33,7 +24,9 @@
   "bugs": {
     "url": "https://github.com/goergch/angular2-qrscanner/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^1.7.1"
+  },
   "devDependencies": {
     "@angular/common": "^5.2.4",
     "@angular/compiler": "^5.2.4",
@@ -62,5 +55,9 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "module": "esm5/angular2-qrscanner.js",
+  "es2015": "esm2015/angular2-qrscanner.js",
+  "typings": "angular2-qrscanner.d.ts",
+  "metadata": "angular2-qrscanner.metadata.json"
 }
