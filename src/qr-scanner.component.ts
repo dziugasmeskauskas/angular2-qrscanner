@@ -146,6 +146,8 @@ export class QrScannerComponent implements OnInit, OnDestroy, AfterViewInit {
         if (!this.videoElement) {
             this.videoElement = this.renderer.createElement('video');
             this.videoElement.setAttribute('autoplay', 'true');
+            // Video tag needs to have playsinline property for it to work on ios devices
+            this.videoElement.setAttribute('playsinline', 'true');
             this.videoElement.setAttribute('muted', 'true');
             this.renderer.appendChild(this.videoWrapper.nativeElement, this.videoElement);
         }
@@ -153,7 +155,8 @@ export class QrScannerComponent implements OnInit, OnDestroy, AfterViewInit {
 
         let constraints: MediaStreamConstraints;
         if (_device) {
-            constraints = {audio: false, video: {deviceId: _device.deviceId}};
+            // A "hack" to always use rear camera on a device if possible
+            constraints = { audio: false, video: { facingMode: {exact: "environment"} } };
         } else {
 
             constraints = {audio: false, video: true};
