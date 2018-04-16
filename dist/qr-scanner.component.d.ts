@@ -1,0 +1,34 @@
+import { AfterViewInit, ElementRef, EventEmitter, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import { QRCode } from './lib/qr-decoder/qrcode';
+export declare class QrScannerComponent implements OnInit, OnDestroy, AfterViewInit {
+    private renderer;
+    canvasWidth: number;
+    canvasHeight: number;
+    debug: boolean;
+    stopAfterScan: boolean;
+    updateTime: number;
+    capturedQr: EventEmitter<string>;
+    foundCameras: EventEmitter<MediaDeviceInfo[]>;
+    videoWrapper: ElementRef;
+    qrCanvas: ElementRef;
+    chooseCamera: Subject<MediaDeviceInfo>;
+    private chooseCamera$;
+    gCtx: CanvasRenderingContext2D;
+    videoElement: HTMLVideoElement;
+    qrCode: QRCode;
+    stream: MediaStream;
+    captureTimeout: any;
+    readonly isCanvasSupported: boolean;
+    constructor(renderer: Renderer2);
+    ngOnInit(): void;
+    ngOnDestroy(): void;
+    ngAfterViewInit(): void;
+    startScanning(device: MediaDeviceInfo): void;
+    stopScanning(): void;
+    getMediaDevices(): Promise<MediaDeviceInfo[]>;
+    QrDecodeCallback(decoded: string): void;
+    private captureToCanvas();
+    private setStream(stream);
+    private useDevice(_device);
+}
